@@ -93,31 +93,26 @@ def main(team, init=False):
             csvwriter = csv.writer(csvfile, delimiter='\t')
             csvwriter.writerow(keys)
 
-    scores = dict(zip(keys, [0]*len(keys)))
+    scores = Counter(dict(zip(keys, [0]*len(keys))))
 
-    tmpmeth = 0
-    tmptool = 0
-    tmping = 0
     cnt = 1
 
     for answer in (get_file(fn) for fn in glob.iglob('../Recipes/*.json')):
         stud = getattr(api, "autograder")(answer['url'])
+        temp = Counter(dict(zip(keys, [0]*len(keys))))
 
         if type(stud) == str:
             stud = json.loads(stud)
         if type(stud) == dict:
-            tmptool = min([check_tools(answer['cooking tools'], stud['cooking tools']), answer['max']['cooking tools']])/float(answer['max']['cooking tools'])
-            scores['cooking tools'] += tmptool
-            tmpmeths = min([check_tools(answer['cooking methods'], stud['cooking methods']), answer['max']['cooking methods']])/float(answer['max']['cooking methods'])
-            scores['cooking methods'] += tmpmeths
+            temp['cooking tools'] = min([check_tools(answer['cooking tools'], stud['cooking tools']), answer['max']['cooking tools']])/float(answer['max']['cooking tools'])
+            temp['cooking methods'] = min([check_tools(answer['cooking methods'], stud['cooking methods']), answer['max']['cooking methods']])/float(answer['max']['cooking methods'])
             if stud['primary cooking method'] == answer['primary cooking method']:
-                tmpmeth = 1
-                scores['primary cooking method'] += 1
+                temp['primary cooking method'] = 1
             stud = stud['ingredients']
-            tmping = check_ingredients(answer['ingredients'], stud)/float(answer['max']['ingredients'])
-            scores['ingredients'] += tmping
+            temp['ingredients'] = check_ingredients(answer['ingredients'], stud)/float(answer['max']['ingredients'])
+            scores += temp
             print "%s\t%s\t%s\t%s\t%s" % ("Recipe", 'Ingredients', 'Primary Method', 'Methods', 'Tools')
-            print "Recipe %d:\t%.3f\t%d\t%.3f\t%.3f" % (cnt, tmping, tmpmeth, tmpmeths, tmptool)
+            print "Recipe %d:\t%.3f\t%d\t%.3f\t%.3f" % (cnt, temp['ingredients'], temp['primary cooking method'], temp['cooking methods'], tmptool)
             cnt += 1
         else:
             print "student answer formatting error"
