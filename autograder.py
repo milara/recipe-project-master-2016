@@ -97,7 +97,7 @@ def main(team, init=False):
 
     cnt = 1
 
-    for answer in (get_file(fn) for fn in glob.iglob('../Recipes/*.json')):
+    for answer in (get_file(fn) for fn in glob.iglob('Recipes/*.json')):
         stud = getattr(api, "autograder")(answer['url'])
         temp = Counter(dict(zip(keys, [0]*len(keys))))
 
