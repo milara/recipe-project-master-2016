@@ -12,7 +12,7 @@
         {
             "name": ["sea salt", "salt"],
             "quantity": [0.5],
-            "measurement": ["tablespoons","tablespoon"],
+            "measurement": ["teaspoons","teaspoon"],
             "descriptor": ["sea"],
             "preparation": [],
             "prep-description": [],
@@ -113,9 +113,13 @@
         "ingredients": 46,
         "primary cooking method": 1,
         "cooking tools": 3,
-        "cooking methods": 7
+        "cooking methods": 7,
+        "implied cooking tools": 0,
+        "implied cooking methods": 0
     },
     "primary cooking method": "bake",
     "cooking methods":["place", "season", "mix", "add", "blended", "form", "preheat", "preheated"],
-    "cooking tools": ["oven","mixing bowl", "baking sheet"]
+    "cooking tools": ["oven","mixing bowl", "baking sheet"],
+    "implied cooking methods": [],
+    "implied cooking tools": []
 }

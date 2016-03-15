@@ -86,9 +86,13 @@
         "ingredients": 31,
         "primary cooking method": 1,
         "cooking tools": 4,
-        "cooking methods": 6
+        "cooking methods": 6,
+        "implied cooking tools": 0,
+        "implied cooking methods": 0
     },
     "primary cooking method": "bake",
     "cooking methods":["preheat", "combine", "season", "place", "form", "mix"],
-    "cooking tools": ["oven","loaf pan", "baking dish", "bowl"]
+    "cooking tools": ["oven","loaf pan", "baking dish", "bowl"],
+    "implied cooking methods": [],
+    "implied cooking tools": []
 }

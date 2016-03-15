@@ -25,7 +25,7 @@
             "descriptor": [],
             "preparation": [],
             "prep-description": [],
-            "max": 4
+            "max": 3
         },
         {
             "name": ["butter"],
@@ -55,7 +55,7 @@
             "max": 4
         },
         {
-            "name": ["chicken broth", "broth"],
+            "name": ["chicken broth", "broth", "chicken stock", "stock"],
             "quantity": [0.5],
             "measurement": ["cup", "cups"],
             "descriptor": ["chicken"],
@@ -77,9 +77,13 @@
         "ingredients": 33,
         "primary cooking method": 1,
         "cooking tools": 6,
-        "cooking methods": 11
+        "cooking methods": 11,
+        "implied cooking tools": 0,
+        "implied cooking methods": 0
     },
     "primary cooking method": "bake",
     "cooking methods":["preheat", "pour","place","coat","coating","squeeze","slice","melt","add","stir","cook","sprinkle","coated","stirring","reduce","adjusting","spoon"],
-    "cooking tools": ["oven","baking dish", "knife", "thermometer", "skillet", "spoon"]
+    "cooking tools": ["oven","baking dish", "knife", "thermometer", "skillet", "spoon"],
+    "implied cooking methods": [],
+    "implied cooking tools": []
 }

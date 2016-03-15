@@ -1,4 +1,4 @@
-'''Version 0.32'''
+'''Version 0.33'''
 import json
 import csv
 import glob
@@ -80,7 +80,7 @@ def check_ingredients(answer, stud):
                         if flag:
                             score += 1
                         else:
-                            print "Match!"
+                            print "No match!"
                 
                 elif stud[x][ind] in answer[x][ind]:
                     score += 1
@@ -103,7 +103,7 @@ def main(team, init=False):
     first time running the program and you want it to print the
     column headers to the file."""
 
-    keys = ['ingredients', 'primary cooking method', 'cooking methods', 'cooking tools']
+    keys = ['ingredients', 'primary cooking method', 'cooking methods', 'implied cooking methods', 'cooking tools', 'implied cooking tools']
 
     if init:
         with open('parsegrades.csv', 'wb') as csvfile:
@@ -123,13 +123,15 @@ def main(team, init=False):
         if type(stud) == dict:
             temp['cooking tools'] = min([check_tools(answer['cooking tools'], stud['cooking tools']), answer['max']['cooking tools']])/float(answer['max']['cooking tools'])
             temp['cooking methods'] = min([check_tools(answer['cooking methods'], stud['cooking methods']), answer['max']['cooking methods']])/float(answer['max']['cooking methods'])
+            temp['implied cooking tools'] = min([check_tools(answer['implied cooking tools'], stud['cooking tools']), answer['max']['implied cooking tools']])/float(answer['max']['implied cooking tools'])
+            temp['implied cooking methods'] = min([check_tools(answer['implied cooking methods'], stud['cooking methods']), answer['max']['implied cooking methods']])/float(answer['max']['implied cooking methods'])
             if stud['primary cooking method'] == answer['primary cooking method']:
                 temp['primary cooking method'] = 1
             stud = stud['ingredients']
             temp['ingredients'] = check_ingredients(answer['ingredients'], stud)/float(answer['max']['ingredients'])
             scores += temp
-            print "%s\t%s\t%s\t%s\t%s" % ("Recipe", 'Ingredients', 'Primary Method', 'Methods', 'Tools')
-            print "Recipe %d:\t%.3f\t%d\t%.3f\t%.3f" % (cnt, temp['ingredients'], temp['primary cooking method'], temp['cooking methods'], temp['cooking tools'])
+            print "%s\t%s\t%s\t%s\t%s\t%s\t%s" % ("Recipe", 'Ingredients', 'Primary Method', 'Methods', 'Implied Methods', 'Tools', 'Implied Tools')
+            print "Recipe %d:\t%.3f\t%d\t%.3f\t%.3f\t%.3f\t%.3f" % (cnt, temp['ingredients'], temp['primary cooking method'], temp['cooking methods'], temp['implied cooking methods'], temp['cooking tools'], temp['implied cooking tools'])
             cnt += 1
         else:
             print "student answer formatting error"
